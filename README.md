@@ -1,26 +1,40 @@
 <img width="1559" alt="Screenshot 2024-07-14 at 6 18 46 PM" src="https://github.com/user-attachments/assets/28e843b2-73cf-437b-ac2a-0234b8249c84">
 
-## VercelLite: (Personal Project)
+# DeployNow
 
-**Description:**
+**DeployNow** is a lightweight prototype of a serverless deployment platform. It enables users to deploy applications directly from a GitHub repository. The platform automates the entire process, including cloning the repository, building the application inside a Docker container, storing the build artifacts in AWS S3, and serving the deployed application via a custom domain.
 
-VercelLite is a prototype for a serverless deployment platform inspired by Vercel. It allows users to deploy their applications by submitting a Git repository URL. The platform automatically builds the application in a Docker container, stores the build artifacts in AWS S3, and provides a custom domain mapping for public access. Users can also monitor the build logs in real-time through a socket connection.
+Users can monitor the build process in real-time through WebSocket communication.
 
-**Tech Stack:**
+> Note: This is a prototype and not intended for production use. Future enhancements are required for authentication, scaling, and robust security.
 
-* **Frontend:** nextjs
-* **Backend:** Node.js (Express.js)
-* **Containerization:** Docker
-* **Cloud Storage:** AWS S3
-* **Container Orchestration:** AWS ECS, ECR
-* **Real-time Messaging:** Redis Pub/Sub
-* **Real-time Communication:** Socket.IO 
+## Key Features
 
-**Workflow:**
+- Deploy applications via GitHub repository URL
+- Build applications using Docker containers
+- Store and serve build artifacts from AWS S3
+- Map custom domains using a reverse proxy
+- Stream real-time build logs using WebSockets and Redis Pub/Sub
+- Container orchestration via AWS ECS and image hosting via AWS ECR
 
-1. **User submits Git repository URL:** The user provides the URL of their Git repository.
-2. **Automatic build:** The platform clones the repository, builds the application using Docker containers within AWS ECS (or simpler Docker management), and stores the built artifacts in AWS S3.
-3. **Custom domain mapping:** The user can configure a custom domain to be mapped to their deployed application. A reverse proxy is used to route requests from the custom domain to the application hosted in S3.
-4. **Real-time build logs:** The platform uses Redis Pub/Sub to publish build logs in real-time. A client-side socket connection allows users to subscribe to these logs and monitor the build progress.
+## Tech Stack
 
-**Note:** This is a prototype and may not be production-ready. Further development is needed for features like user authentication, automated scaling, and advanced security measures.
+- **Frontend**: Next.js
+- **Backend**: Node.js with Express.js
+- **Containerization**: Docker
+- **Cloud Storage**: AWS S3
+- **Container Orchestration**: AWS ECS, AWS ECR
+- **Real-Time Messaging**: Redis Pub/Sub
+- **WebSockets**: Socket.IO
+
+## Workflow
+
+1. User submits a GitHub repository URL through the frontend.
+2. The backend clones the repository and initiates a Docker build.
+3. Upon successful build, the generated artifacts are uploaded to AWS S3.
+4. A reverse proxy maps the custom domain to the corresponding application in S3.
+5. Build logs are streamed in real-time using Redis Pub/Sub and delivered to the frontend via Socket.IO.
+
+## License
+
+This project is licensed under the Apache 2.0 License.
